@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF5F5"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical">
+
+    <!-- Nombre del servicio -->
+<TextView
+android:id="@+id/textNombreServicio"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_weight="1"
+android:text="Corte"
+android:textSize="16sp"
+android:textColor="#D16D6D"
+    android:ellipsize="end"
+    android:maxLines="1"/>
+
+    <!-- Duración del servicio -->
+<TextView
+android:id="@+id/textDuracionServicio"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="30 min"
+android:textSize="14sp"
+android:textColor="#777777"
+android:layout_marginEnd="12dp" />
+
+    <!-- Precio del servicio -->
+<TextView
+android:id="@+id/textPrecioServicio"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="$20"
+android:textSize="14sp"
+android:textColor="#D16D6D"
+    android:gravity="end"/>
+
+    </LinearLayout>

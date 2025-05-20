@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:background="#F3F3F3">
+
+    <!-- Fecha seleccionada (No editable) -->
+    <TextView
+        android:id="@+id/textFechaSeleccionada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha: 12/05/2025"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Selector de hora -->
+    <Spinner
+        android:id="@+id/spinnerHoras"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="#333333" />
+
+    <!-- Precio total (No editable) -->
+    <TextView
+        android:id="@+id/textPrecioTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Precio Total: 0.00€"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Duración total (No editable) -->
+    <TextView
+        android:id="@+id/textDuracionTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Duración Total: 0 mins"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Observaciones (Editable) -->
+    <EditText
+        android:id="@+id/editObservaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Observaciones"
+        android:inputType="textMultiLine"
+        android:padding="16dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#333333"
+        android:textColorHint="#888888"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Servicios a elegir (CheckBox) -->
+    <TextView
+        android:id="@+id/textServicios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecciona los servicios"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Lista de servicios -->
+    <CheckBox
+        android:id="@+id/checkboxServicio1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textColorHint="#888888" />
+
+    <CheckBox
+        android:id="@+id/checkboxServicio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textColorHint="#888888" />
+
+    <CheckBox
+        android:id="@+id/checkboxServicio3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textColorHint="#888888" />
+
+    <!-- Botón para confirmar reserva -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnReservar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_salmon"
+        android:backgroundTint="@null"
+        android:padding="16dp"
+        android:text="Reservar"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F5">
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/textTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle de Cita"
+        android:textSize="24sp"
+        android:textColor="#D16D6D"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Separador -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Fecha y Hora -->
+    <TextView
+        android:id="@+id/textFechaHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Duración -->
+    <TextView
+        android:id="@+id/textDuracion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Precio -->
+    <TextView
+        android:id="@+id/textPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Observaciones -->
+    <TextView
+        android:id="@+id/textObservaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Observaciones: Cliente con alergias."
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Lista de Servicios -->
+    <TextView
+        android:id="@+id/textServiciosTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Servicios"
+        android:textSize="20sp"
+        android:textColor="#D16D6D"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <ListView
+        android:id="@+id/listViewServicios"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEliminarCita"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_salmon"
+        android:backgroundTint="@null"
+        android:padding="16dp"
+        android:text="Eliminar cita"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+    />
+
+
+</LinearLayout>

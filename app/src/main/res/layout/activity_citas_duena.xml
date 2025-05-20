@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFF5F5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textTituloDueña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Citas Programadas"
+        android:textSize="24sp"
+        android:textColor="#D16D6D"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginBottom="12dp" />
+
+    <ListView
+        android:id="@+id/listViewCitasDueña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#D16D6D"
+        android:dividerHeight="1dp"
+        android:background="#FFFFFFFF"
+        android:padding="8dp" />
+</LinearLayout>
