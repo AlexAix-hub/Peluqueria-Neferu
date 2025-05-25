@@ -1,3 +1,7 @@
+// Este código está licenciado bajo la Licencia Creative Commons Attribution-ShareAlike 4.0 Internacional.
+// Para más información, visita: https://creativecommons.org/licenses/by-sa/4.0/
+// Autor: Alejandro Aix Utreras - Año: 2025
+
 package com.example.peluquerianeferu;
 
 import android.annotation.SuppressLint;
@@ -8,13 +12,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -27,14 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.peluquerianeferu.database.DBHelper;
-import com.example.peluquerianeferu.model.Cita;
 import com.example.peluquerianeferu.model.Servicio;
-import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +39,6 @@ import java.util.Map;
 
 public class ClienteActivity extends AppCompatActivity {
 
-    private CalendarView calendarView;
     private DBHelper dbHelper;
 
     @Override
@@ -63,6 +56,7 @@ public class ClienteActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendarView);
         AppCompatButton btnVerMisCitas = findViewById(R.id.btnVerMisCitas);
+        AppCompatButton btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
         calendarView.setFirstDayOfWeek(Calendar.MONDAY);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -87,7 +81,7 @@ public class ClienteActivity extends AppCompatActivity {
                 } else {
                     // Formatear fecha (opcional)
                     String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                    showReservationDialog(fechaSeleccionada);
+                    mostrarDialogReserva(fechaSeleccionada);
                 }
             }
         });
@@ -98,14 +92,27 @@ public class ClienteActivity extends AppCompatActivity {
             intent.putExtra("nombreUsuario", nombreUsuario);
             startActivity(intent);
         });
+
+        btnCerrarSesion.setOnClickListener(v -> {
+            new AlertDialog.Builder(ClienteActivity.this)
+                    .setTitle("Cerrar sesión")
+                    .setMessage("¿Estás seguro de que deseas cerrar sesión?")
+                    .setPositiveButton("Sí", (dialog, which) -> {
+                        // Volver al Login y limpiar la pila de actividades
+                        Intent intent = new Intent(ClienteActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish(); // cerrar esta actividad por si acaso
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
     }
 
-    private void showReservationDialog(String fechaSeleccionada) {
-        // Crear un nuevo diálogo
+    private void mostrarDialogReserva(String fechaSeleccionada) {
         final Dialog dialog = new Dialog(ClienteActivity.this);
         dialog.setContentView(R.layout.dialogo_reserva);
 
-        // Definir las vistas del diálogo
         TextView textFechaSeleccionada = dialog.findViewById(R.id.textFechaSeleccionada);
         Spinner spinnerHoras = dialog.findViewById(R.id.spinnerHoras);
         TextView textPrecioTotal = dialog.findViewById(R.id.textPrecioTotal);
@@ -116,17 +123,14 @@ public class ClienteActivity extends AppCompatActivity {
         AppCompatCheckBox checkboxServicio3 = dialog.findViewById(R.id.checkboxServicio3);
         AppCompatButton btnReservar = dialog.findViewById(R.id.btnReservar);
 
-        // Configurar la fecha seleccionada (no editable)
         textFechaSeleccionada.setText(fechaSeleccionada);
 
-        // Configurar el Spinner con las horas disponibles (ejemplo)
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getHorasDisponibles());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHoras.setAdapter(adapter);
 
         List<Servicio> servicios = dbHelper.obtenerTodosLosServicios();
         Map<CheckBox, Servicio> mapaServicios = new HashMap<>();
-
 
         if (servicios.size() >= 3) {
             Servicio s1 = servicios.get(0);
@@ -148,7 +152,6 @@ public class ClienteActivity extends AppCompatActivity {
             });
         }
 
-        // Botón de reservar
         btnReservar.setOnClickListener(v -> {
 
             if (!checkboxServicio1.isChecked() && !checkboxServicio2.isChecked() && !checkboxServicio3.isChecked()) {
@@ -215,12 +218,9 @@ public class ClienteActivity extends AppCompatActivity {
             }
         });
 
-
-        // Mostrar el diálogo
         dialog.show();
     }
 
-    // Actualizar el precio y la duración cuando se seleccionan/des-seleccionan los servicios
     private void actualizarPrecioYDuracion(Map<CheckBox, Servicio> mapaServicios, TextView textPrecioTotal, TextView textDuracionTotal) {
         double precioTotal = 0;
         int duracionTotal = 0;
@@ -239,7 +239,6 @@ public class ClienteActivity extends AppCompatActivity {
         textDuracionTotal.setText("Duración Total: " + duracionTotal + " mins");
     }
 
-    // Método para obtener las horas disponibles para el Spinner
     private List<String> getHorasDisponibles() {
         List<String> horas = new ArrayList<>();
         horas.add("9:00 AM");
@@ -280,7 +279,6 @@ public class ClienteActivity extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        // Crear el diálogo de confirmación
         new AlertDialog.Builder(this)
                 .setMessage("¿Estás seguro de que deseas salir de la aplicación?")
                 .setCancelable(false) // No se puede cancelar tocando fuera del diálogo
@@ -293,6 +291,4 @@ public class ClienteActivity extends AppCompatActivity {
                 .setNegativeButton("No", null) // Si selecciona "No", no hace nada
                 .show();
     }
-
-
 }

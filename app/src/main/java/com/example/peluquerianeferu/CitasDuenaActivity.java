@@ -1,3 +1,7 @@
+// Este código está licenciado bajo la Licencia Creative Commons Attribution-ShareAlike 4.0 Internacional.
+// Para más información, visita: https://creativecommons.org/licenses/by-sa/4.0/
+// Autor: Alejandro Aix Utreras - Año: 2025
+
 package com.example.peluquerianeferu;
 
 import android.annotation.SuppressLint;
@@ -54,18 +58,16 @@ public class CitasDuenaActivity extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        // Crear el diálogo de confirmación
         new AlertDialog.Builder(this)
                 .setMessage("¿Estás seguro de que quieres salir de la aplicación?")
                 .setCancelable(false) // Evitar que el usuario cierre el diálogo tocando fuera de él
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Si el usuario confirma, cerrar la actividad
                         finishAffinity(); // Cierra todas las actividades y termina la aplicación
                     }
                 })
-                .setNegativeButton("No", null) // Si el usuario cancela, no hacer nada
+                .setNegativeButton("No", null)
                 .show();
     }
 

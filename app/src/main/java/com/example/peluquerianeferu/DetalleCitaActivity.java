@@ -1,3 +1,7 @@
+// Este código está licenciado bajo la Licencia Creative Commons Attribution-ShareAlike 4.0 Internacional.
+// Para más información, visita: https://creativecommons.org/licenses/by-sa/4.0/
+// Autor: Alejandro Aix Utreras - Año: 2025
+
 package com.example.peluquerianeferu;
 
 import android.content.Intent;
@@ -23,8 +27,6 @@ public class DetalleCitaActivity extends AppCompatActivity {
 
     private TextView textFechaHora, textDuracion, textPrecio, textObservaciones, textServiciosTitulo;
     private ListView listViewServicios;
-    private ArrayList<Servicio> serviciosCita;
-    private ServicioAdapter servicioAdapter;
     private AppCompatButton btnEliminarCita;
 
     private DBHelper dbHelper;
@@ -32,8 +34,7 @@ public class DetalleCitaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_cita); // Usa el XML previamente definido
-
+        setContentView(R.layout.activity_detalle_cita);
         dbHelper = new DBHelper(this);
 
         int usuarioId = getIntent().getIntExtra("usuarioId", -1);
@@ -71,14 +72,13 @@ public class DetalleCitaActivity extends AppCompatActivity {
             // Eliminar la cita
             dbHelper.eliminarCita(citaId);
 
-            // Mostrar un mensaje de confirmación
             Toast.makeText(getApplicationContext(), "Cita eliminada correctamente", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(DetalleCitaActivity.this, ClienteActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("nombreUsuario", nombreUsuario); // si necesitas pasarlo
             startActivity(intent);
-            finish(); // cierra DetalleCitaActivity
+            finish();
         });
 
     }
@@ -91,16 +91,13 @@ public class DetalleCitaActivity extends AppCompatActivity {
             double precio = cita.getPrecioTotal();
             String precioFormateado = String.format(Locale.US, "%.2f€", precio);
 
-            // Mostrar la información de la cita
             textFechaHora.setText("Fecha y Hora: " + cita.getFecha() + " - " + cita.getHora());
             textDuracion.setText("Duración: " + cita.getDuracionTotal() + " min");
             textPrecio.setText("Precio: " + precioFormateado);
             textObservaciones.setText("Observaciones: " + cita.getObservaciones());
 
-            // Obtener los servicios asociados a la cita usando el método que ya tienes
             List<Servicio> serviciosCita = dbHelper.obtenerServiciosDeCita(citaId);
 
-            // Usamos un Adapter para mostrar los servicios en el ListView
             ServicioAdapter servicioAdapter = new ServicioAdapter(this, serviciosCita);
             listViewServicios.setAdapter(servicioAdapter);
         }

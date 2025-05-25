@@ -1,3 +1,7 @@
+// Este código está licenciado bajo la Licencia Creative Commons Attribution-ShareAlike 4.0 Internacional.
+// Para más información, visita: https://creativecommons.org/licenses/by-sa/4.0/
+// Autor: Alejandro Aix Utreras - Año: 2025
+
 package com.example.peluquerianeferu;
 
 import android.content.Intent;
@@ -24,14 +28,12 @@ public class RegistroActivity extends AppCompatActivity {
 
         DBHelper dbHelper = new DBHelper(this);
 
-        // Referencias UI
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextNombreUsuario = findViewById(R.id.editTextNombreUsuario);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextTelefono = findViewById(R.id.editTextTelefono);
         btnGuardarRegistro = findViewById(R.id.btnGuardarRegistro);
 
-        // Acción al pulsar guardar
         btnGuardarRegistro.setOnClickListener(v -> {
             String nombre = editTextNombre.getText().toString().trim();
             String nombreUsuario = editTextNombreUsuario.getText().toString().trim();
@@ -49,7 +51,6 @@ public class RegistroActivity extends AppCompatActivity {
                 return;
             }
 
-            // Crear usuario y guardar
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setNombre(nombre);
             nuevoUsuario.setNombreUsuario(nombreUsuario);

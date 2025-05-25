@@ -1,3 +1,7 @@
+// Este código está licenciado bajo la Licencia Creative Commons Attribution-ShareAlike 4.0 Internacional.
+// Para más información, visita: https://creativecommons.org/licenses/by-sa/4.0/
+// Autor: Alejandro Aix Utreras - Año: 2025
+
 package com.example.peluquerianeferu.database;
 
 import android.content.ContentValues;
