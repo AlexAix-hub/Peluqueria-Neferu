@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
@@ -27,8 +28,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.peluquerianeferu.database.DBHelper;
 import com.example.peluquerianeferu.model.Servicio;
+import com.example.peluquerianeferu.model.Usuario;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -212,10 +221,15 @@ public class ClienteActivity extends AppCompatActivity {
                     dialog.dismiss();  // Cierra el diálogo si está abierto
                 }
 
+                Usuario usuario = dbHelper.obtenerUsuarioPorId(usuarioId);
+                enviarDatosAGoogleSheets(fecha,hora,usuario.getNombre(),usuario.getTelefono(),observaciones);
+
             } else {
                 // Si no se pudo insertar la cita, mostrar mensaje de error
                 Toast.makeText(this, "Hubo un error al reservar la cita. Intenta nuevamente.", Toast.LENGTH_LONG).show();
             }
+
+
         });
 
         dialog.show();
@@ -290,5 +304,29 @@ public class ClienteActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null) // Si selecciona "No", no hace nada
                 .show();
+    }
+
+    private void enviarDatosAGoogleSheets(String fecha, String hora, String nombre, String telefono, String observaciones) {
+        String url = "https://script.google.com/macros/s/AKfycbzEkbPgXK2kysKfmbF7Zz5JHWVU4U31HXYEogLK6sbv2g2HXexxQbnAkti7XsH4Kg4D/exec";
+
+        JSONObject datos = new JSONObject();
+        try {
+            datos.put("fecha", fecha);
+            datos.put("hora", hora);
+            datos.put("nombre", nombre);
+            datos.put("telefono", telefono);
+            datos.put("observaciones", observaciones);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, datos,
+                response -> Log.d("GoogleSheet", "Enviado correctamente"),
+                error -> Log.e("GoogleSheet", "Error al enviar", error)
+        );
+
+        queue.add(request);
     }
 }

@@ -38,6 +38,8 @@ annotation = { group = "androidx.annotation", name = "annotation", version.ref =
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
+volley = { module = "com.android.volley:volley", version = "1.2.1" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
